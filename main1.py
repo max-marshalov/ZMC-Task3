@@ -20,6 +20,19 @@ class Dialog(QMainWindow, Ui_Dialog):
         self.price.valueChanged.connect(self.shw)
         self.count.valueChanged.connect(self.shw)
         self.pushButton_close.clicked.connect(self.cls)
+        # выпадающий календарь
+
+        self.dateEdit = QtWidgets.QDateEdit(self)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.dateEdit.setFont(font)
+        self.dateEdit.setCalendarPopup(True)  # +++
+        self.dateEdit.setTimeSpec(QtCore.Qt.LocalTime)
+        self.dateEdit.setGeometry(QtCore.QRect(220, 120, 133, 30))
+
+        self.dateEdit.setDate(QtCore.QDate.currentDate())
+
+        ######################
 
     def cls(self):
         self.wind = UI_Task1("bd.db")
