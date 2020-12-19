@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2fce695b-0ff3-41d9-99e3-6a0889b38a3f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2fce695b-0ff3-41d9-99e3-6a0889b38a3f" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +37,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main3">
+  <component name="RunManager" selected="Python.main1">
     <configuration name="main1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="NTI-ABP_2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -105,9 +103,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main1" />
         <item itemvalue="Python.main3" />
         <item itemvalue="Python.main2" />
-        <item itemvalue="Python.main1" />
       </list>
     </recent_temporary>
   </component>
