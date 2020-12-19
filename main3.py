@@ -24,13 +24,24 @@ class UI_Task3(QMainWindow, Ui_MainWindow):
     def calendar(self):
         self.date = self.calendarWidget.selectedDate().toString('dd/MM/yyyy')
         try:
-            self.dc = self.curs.execute(
-                """select sum(price) from deals where deals.date = "{}" """.format(self.date)).fetchone()[0] - \
-                      self.curs.execute(
-                          """select sum(sum) from products where products.date = "{}" """.format(self.date)).fetchone()[
-                          0]
+            self.dc1 = self.curs.execute(
+                """select sum(price) from deals where deals.date = "{}" """.format(self.date)).fetchone()[0]
+            self.dc2 = self.curs.execute(
+                """select sum(sum) from products where products.date = "{}" """.format(self.date)).fetchone()[
+                0]
+            if not self.dc1:
+                if not self.dc2:
+                    self.dc = 0
+                else:
+                    self.dc = 0 - self.dc2
+            elif not self.dc2:
+                if not self.dc1:
+                    self.dc = 0
+                else:
+                    self.dc = self.dc1
+            else:
+                self.dc = self.dc1 - self.dc2
             self.date_cash.setText(str(self.dc))
-            print(self.dc)
         except Exception as er:
             print(er)
 
