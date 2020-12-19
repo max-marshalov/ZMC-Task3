@@ -96,6 +96,32 @@
      <string>0</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_sdelki">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>330</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сделки</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_mat">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>330</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Расходники</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -103,7 +129,7 @@
      <x>0</x>
      <y>0</y>
      <width>500</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

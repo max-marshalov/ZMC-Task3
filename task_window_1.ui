@@ -31,7 +31,7 @@
      <rect>
       <x>30</x>
       <y>30</y>
-      <width>731</width>
+      <width>741</width>
       <height>421</height>
      </rect>
     </property>
@@ -85,6 +85,32 @@
     </property>
     <property name="text">
      <string>Добавить материал</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_sdelki">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>610</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сделки</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_buh">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>610</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Расчёты</string>
     </property>
    </widget>
   </widget>

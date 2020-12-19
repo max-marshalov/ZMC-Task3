@@ -6,9 +6,9 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 import sqlite3
 
 
-class Dialog(QMainWindow, Ui_Dialog):
+class Dialog_2(QMainWindow, Ui_Dialog):
     def __init__(self, path):
-        super(Dialog, self).__init__()
+        super(Dialog_2, self).__init__()
         self.setupUi(self)
         self.path = path
         self.date.setDisplayFormat('dd/MM/yyyy')
@@ -18,7 +18,7 @@ class Dialog(QMainWindow, Ui_Dialog):
         self.pushButton_close.clicked.connect(self.cls)
 
     def cls(self):
-        self.wind = UI_Task1("bd.db")
+        self.wind = UI_Task2("bd.db")
         self.wind.show()
         self.close()
 
@@ -44,7 +44,7 @@ class Dialog(QMainWindow, Ui_Dialog):
         self.cls()
 
 
-class UI_Task1(QMainWindow, Ui_MainWindow):
+class UI_Task2(QMainWindow, Ui_MainWindow):
     def __init__(self, path):
         self.path = path
         super().__init__()
@@ -86,7 +86,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         self.rows += 1
 
     def win(self):
-        self.dg = Dialog(self.path)
+        self.dg = Dialog_2(self.path)
         self.dg.show()
         self.close()
 
@@ -105,6 +105,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = UI_Task1("bd.db")
+    mainWindow = UI_Task2("bd.db")
     mainWindow.show()
     sys.exit(app.exec())
