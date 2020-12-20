@@ -65,6 +65,6 @@ class Ui_MainWindow_1(object):
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Сумма"))
         self.pushButton_close.setText(_translate("MainWindow", "Закрыть"))
-        self.pushButton_add.setText(_translate("MainWindow", "Добавить материал"))
+        self.pushButton_add.setText(_translate("MainWindow", "Добавить расходник"))
         self.pushButton_sdelki.setText(_translate("MainWindow", "Сделки"))
         self.pushButton_buh.setText(_translate("MainWindow", "Расчёты"))
