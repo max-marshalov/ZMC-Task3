@@ -3,18 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2fce695b-0ff3-41d9-99e3-6a0889b38a3f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bd.db" beforeDir="false" afterPath="$PROJECT_DIR$/bd.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/dialog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dialog_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/dialog_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main1.py" beforeDir="false" afterPath="$PROJECT_DIR$/main1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main2.py" beforeDir="false" afterPath="$PROJECT_DIR$/main2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main3.py" beforeDir="false" afterPath="$PROJECT_DIR$/main3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_window_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_window_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_window_1.ui" beforeDir="false" afterPath="$PROJECT_DIR$/task_window_1.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_window_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_window_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_window_2.ui" beforeDir="false" afterPath="$PROJECT_DIR$/task_window_2.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_window_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_window_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_window_3.ui" beforeDir="false" afterPath="$PROJECT_DIR$/task_window_3.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dialog_3.ui" beforeDir="false" afterPath="$PROJECT_DIR$/dialog_3.ui" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +26,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/ZMC-Task3-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">

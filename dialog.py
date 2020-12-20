@@ -60,7 +60,7 @@ class Ui_Dialog_1(object):
         self.prod_name.setGeometry(QtCore.QRect(140, 52, 181, 20))
         self.prod_name.setObjectName("prod_name")
         self.Sum = QtWidgets.QLCDNumber(Dialog)
-        self.Sum.setGeometry(QtCore.QRect(140, 140, 81, 23))
+        self.Sum.setGeometry(QtCore.QRect(140, 140, 101, 41))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -74,7 +74,7 @@ class Ui_Dialog_1(object):
         self.count.setObjectName("count")
         self.price = QtWidgets.QDoubleSpinBox(Dialog)
         self.price.setGeometry(QtCore.QRect(140, 110, 121, 22))
-        self.price.setMinimum(0)
+        self.price.setMinimum(0.01)
         self.price.setMaximum(10000000.0)
         self.price.setObjectName("price")
 

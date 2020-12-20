@@ -245,6 +245,7 @@ class UI_Task3(QMainWindow, Ui_MainWindow_3):
         self.calendarWidget.selectionChanged.connect(self.calendar)
         self.conn = sqlite3.connect(self.path)
         self.curs = self.conn.cursor()
+        self.calendar()
         try:
             self.un = self.curs.execute(
                 """select sum(price) from deals""").fetchone()[0] - \
