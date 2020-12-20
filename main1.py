@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
 from PyQt5 import QtWidgets, QtGui, QtCore
 import sqlite3
+import datetime as dt
 
 
 class Dialog(QMainWindow, Ui_Dialog_1):
@@ -21,6 +22,13 @@ class Dialog(QMainWindow, Ui_Dialog_1):
         self.count.valueChanged.connect(self.shw)
         self.pushButton_close.clicked.connect(self.cls)
         self.params = params
+        if self.params:
+            date = dt.datetime.strptime(self.params[0], '%d/%m/%Y').date()
+            self.date.setDate(date)
+            self.prod_name.setText(self.params[1])
+            self.count.setValue(int(self.params[2]))
+            self.price.setValue(float(self.params[3]))
+
 
     def cls(self):
         self.wind = UI_Task1("bd.db")
