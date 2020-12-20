@@ -1,16 +1,17 @@
-from task_window_2 import Ui_MainWindow
-from dialog_2 import Ui_Dialog
+from task_window_2 import Ui_MainWindow_2
+from dialog_2 import Ui_Dialog_2
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
 from PyQt5 import QtWidgets, QtGui, QtCore
 import sqlite3
 
 
-class Dialog_2(QMainWindow, Ui_Dialog):
-    def __init__(self, path):
+class Dialog_2(QMainWindow, Ui_Dialog_2):
+    def __init__(self, path, params=None):
         super(Dialog_2, self).__init__()
         self.setupUi(self)
         self.path = path
+        self.params = params
         self.date.setDisplayFormat('dd/MM/yyyy')
         self.conn = sqlite3.connect(self.path)
         self.curs = self.conn.cursor()
@@ -23,28 +24,45 @@ class Dialog_2(QMainWindow, Ui_Dialog):
         self.close()
 
     def save(self):
-        try:
-            print(self.date.text(),
-                  self.prod_name.text(),
-                  self.client_name.text(),
-                  self.price.value())
-            self.curs.execute(
-                """  insert into deals(date, prod_name, client_name, price) values("{}", "{}", "{}", {})""".format(
+        if not self.params:
+            try:
+                print(self.date.text(),
+                      self.prod_name.text(),
+                      self.client_name.text(),
+                      self.price.value())
+                self.curs.execute(
+                    """  insert into deals(date, prod_name, client_name, price) values("{}", "{}", "{}", {})""".format(
 
-                    self.date.text(),
-                    self.prod_name.text(),
-                    self.client_name.text(),
-                    self.price.value()))  # это обычное число
-            print('xxx')
-            self.conn.commit()
-            self.conn.close()
-            print("ok")
-        except Exception as er:
-            print(er)
-        self.cls()
+                        self.date.text(),
+                        self.prod_name.text(),
+                        self.client_name.text(),
+                        self.price.value()))  # это обычное число
+                print('xxx')
+                self.conn.commit()
+                self.conn.close()
+                print("ok")
+            except Exception as er:
+                print(er)
+            self.cls()
+        else:
+            try:
+                print(self.params)
+                id = self.curs.execute(
+                    """select deal_id from deals where date = "{}" and prod_name = "{}" and client_name = "{}" and price = {}""".format(
+                        self.params[0], self.params[1], self.params[2], float(self.params[3]))).fetchone()[0]
+                self.curs.execute("""update deals set date = "{}", prod_name = "{}", client_name = "{}", price = {} where deal_id = {}
+                """.format(self.date.text(),
+                           self.prod_name.text(),
+                           self.client_name.text(),
+                           self.price.value(), id))
+                self.conn.commit()
+                self.conn.close()
+                self.cls()
+            except Exception as er:
+                print(er)
 
 
-class UI_Task2(QMainWindow, Ui_MainWindow):
+class UI_Task2(QMainWindow, Ui_MainWindow_2):
     def __init__(self, path):
         self.path = path
         super().__init__()
@@ -56,6 +74,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow):
 
         self.rows = self.tableWidget.rowCount() + 1
         self.t = 1
+        self.tableWidget.cellClicked.connect(self.upd)
 
         self.tableWidget.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         self.tableWidget.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
@@ -99,6 +118,33 @@ class UI_Task2(QMainWindow, Ui_MainWindow):
         except Exception as error:
             QMessageBox.critical(self, "Ошибка", "Сохраните данные перед тем как выполнять сортировку", QMessageBox.Ok)
             print(error, "update_list")
+
+    def upd(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Question)
+        # msg.setIconPixmap(pixmap)  # Своя картинка
+
+        msg.setWindowTitle("Изменить данные")
+        msg.setText("Вы хотите изменить данные?")
+        # msg.setInformativeText("Хотите сохранить информацию перед выходом?")
+
+        msg.addButton('Отмена', QMessageBox.YesRole)
+        ok_button = msg.addButton('Изменить', QMessageBox.AcceptRole)
+        # close_button = msg.addButton('Закрыть', QMessageBox.RejectRole)
+
+        msg.exec()
+        if msg.clickedButton() == ok_button:
+            try:
+                a = self.tableWidget.currentRow()
+                x = []
+                for i in range(self.tableWidget.columnCount()):
+                    x.append(self.tableWidget.item(a, i).text())
+                self.dialog = Dialog_2(self.path, params=x)
+                self.dialog.show()
+                self.close()
+
+            except Exception as error:
+                print(error)
 
 
 if __name__ == "__main__":

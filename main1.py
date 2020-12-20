@@ -1,13 +1,13 @@
-from task_window_1 import Ui_MainWindow
-from dialog import Ui_Dialog
+from task_window_1 import Ui_MainWindow_1
+from dialog import Ui_Dialog_1
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
 from PyQt5 import QtWidgets, QtGui, QtCore
 import sqlite3
 
 
-class Dialog(QMainWindow, Ui_Dialog):
-    def __init__(self, path):
+class Dialog(QMainWindow, Ui_Dialog_1):
+    def __init__(self, path, params=None):
         super(Dialog, self).__init__()
         self.setupUi(self)
         self.path = path
@@ -20,6 +20,7 @@ class Dialog(QMainWindow, Ui_Dialog):
         self.price.valueChanged.connect(self.shw)
         self.count.valueChanged.connect(self.shw)
         self.pushButton_close.clicked.connect(self.cls)
+        self.params = params
 
     def cls(self):
         self.wind = UI_Task1("bd.db")
@@ -31,30 +32,49 @@ class Dialog(QMainWindow, Ui_Dialog):
         self.Sum.display(self.sam)
 
     def save(self):
-        try:
-            print(self.date.text(),
-                  self.prod_name.text(),
-                  self.count.value(),
-                  self.price.value(),
-                  self.sam)
-            self.curs.execute(
-                """  insert into products(date, prod_name, count, price, sum) values("{}", "{}", {}, {}, {})""".format(
+        if not self.params:
+            try:
+                print(self.date.text(),
+                      self.prod_name.text(),
+                      self.count.value(),
+                      self.price.value(),
+                      self.sam)
+                self.curs.execute(
+                    """  insert into products(date, prod_name, count, price, sum) values("{}", "{}", {}, {}, {})""".format(
 
-                    self.date.text(),
-                    self.prod_name.text(),
-                    self.count.value(),
-                    self.price.value(),
-                    self.sam))  # это обычное число
-            print('xxx')
-            self.conn.commit()
-            self.conn.close()
-            print("ok")
-        except Exception as er:
-            print(er)
-        self.cls()
+                        self.date.text(),
+                        self.prod_name.text(),
+                        self.count.value(),
+                        self.price.value(),
+                        self.sam))  # это обычное число
+                print('xxx')
+                self.conn.commit()
+                self.conn.close()
+                print("ok")
+            except Exception as er:
+                print(er)
+            self.cls()
+        else:
+            try:
+                print(self.params)
+                id = self.curs.execute(
+                    """select prod_id from products where date = "{}" and prod_name = "{}" and count = {} and price = {} and sum = {}""".format(
+                        self.params[0], self.params[1], int(self.params[2]), float(self.params[3]),
+                        float(self.params[4]))).fetchone()[0]
+                self.curs.execute("""update products set date = "{}", prod_name = "{}", count = {}, price = {}, sum = {} where prod_id = {}
+                """.format(self.date.text(),
+                           self.prod_name.text(),
+                           self.count.value(),
+                           self.price.value(),
+                           self.sam, id))
+                self.conn.commit()
+                self.conn.close()
+                self.cls()
+            except Exception as er:
+                print(er)
 
 
-class UI_Task1(QMainWindow, Ui_MainWindow):
+class UI_Task1(QMainWindow, Ui_MainWindow_1):
     def __init__(self, path):
         self.path = path
         super().__init__()
@@ -66,6 +86,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
 
         self.rows = self.tableWidget.rowCount() + 1
         self.t = 1
+        self.tableWidget.cellClicked.connect(self.upd)
 
         self.tableWidget.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
         self.tableWidget.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
@@ -111,6 +132,33 @@ class UI_Task1(QMainWindow, Ui_MainWindow):
         except Exception as error:
             QMessageBox.critical(self, "Ошибка", "Сохраните данные перед тем как выполнять сортировку", QMessageBox.Ok)
             print(error, "update_list")
+
+    def upd(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Question)
+        # msg.setIconPixmap(pixmap)  # Своя картинка
+
+        msg.setWindowTitle("Изменить данные")
+        msg.setText("Вы хотите изменить данные?")
+        # msg.setInformativeText("Хотите сохранить информацию перед выходом?")
+
+        msg.addButton('Отмена', QMessageBox.YesRole)
+        ok_button = msg.addButton('Изменить', QMessageBox.AcceptRole)
+        # close_button = msg.addButton('Закрыть', QMessageBox.RejectRole)
+
+        msg.exec()
+        if msg.clickedButton() == ok_button:
+            try:
+                a = self.tableWidget.currentRow()
+                x = []
+                for i in range(self.tableWidget.columnCount()):
+                    x.append(self.tableWidget.item(a, i).text())
+                self.dialog = Dialog(self.path, params=x)
+                self.dialog.show()
+                self.close()
+
+            except Exception as error:
+                print(error)
 
 
 if __name__ == "__main__":
