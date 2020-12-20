@@ -14,6 +14,7 @@ class Dialog(QMainWindow, Ui_Dialog_1):
     def __init__(self, path, params=None):
         super(Dialog, self).__init__()
         self.setupUi(self)
+        self.setWindowTitle('Расходники')
         self.path = path
         self.date.setDisplayFormat('dd/MM/yyyy')
         self.conn = sqlite3.connect(self.path)
@@ -89,6 +90,7 @@ class UI_Task1(QMainWindow, Ui_MainWindow_1):
         self.path = path
         super().__init__()
         self.setupUi(self)
+        self.setWindowTitle('Расходники')
         self.data = self.get_data()
         for i in range(len(self.data)):
             self.add()
@@ -188,6 +190,7 @@ class Dialog_2(QMainWindow, Ui_Dialog_2):
     def __init__(self, path, params=None):
         super(Dialog_2, self).__init__()
         self.setupUi(self)
+        self.setWindowTitle('Сделки')
         self.path = path
         self.params = params
         self.date.setDisplayFormat('dd/MM/yyyy')
@@ -251,6 +254,7 @@ class UI_Task2(QMainWindow, Ui_MainWindow_2):
         self.path = path
         super().__init__()
         self.setupUi(self)
+        self.setWindowTitle('Сделки')
         self.data = self.get_data()
         for i in range(len(self.data)):
             self.add()
@@ -348,6 +352,7 @@ class UI_Task3(QMainWindow, Ui_MainWindow_3):
         super().__init__()
         self.setupUi(self)
         self.path = path
+        self.setWindowTitle('Расчеты')
         self.calendarWidget.selectionChanged.connect(self.calendar)
         self.conn = sqlite3.connect(self.path)
         self.curs = self.conn.cursor()
